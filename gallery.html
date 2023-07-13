@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pope's Collection</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .image-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .image-gallery img {
+      width: 200px;
+      height: 350px;
+      margin: 10px;
+      object-fit: cover;
+      border-radius: 5px;
+      transition: transform 0.3s;
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .image-gallery img:hover {
+      transform: scale(1.1);
+    }
+    
+    .image-gallery img::after {
+      content: attr(data-description);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    
+    .image-gallery img:hover::after {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .image-overlay {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      z-index: 9999;
+    }
+    
+    .image-overlay.active {
+      display: block;
+    }
+    
+    .image-overlay img {
+      width: 700px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    
+    .content {
+      line-height: 1.6;
+      margin-top: 20px;
+    }
+    
+    .color-schemes {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    
+    .color-schemes label {
+      margin-right: 10px;
+    }
+    
+    .font-sizes {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    
+    .font-sizes button {
+      margin-right: 5px;
+    }
+    
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+  </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Pope's Collection</h1>
+      </div>
+
+      <div class="color-schemes">
+        <label>Color Scheme:</label>
+        <button onclick="changeColorScheme('default')">Default</button>
+        <button onclick="changeColorScheme('dark')">Dark</button>
+        <button onclick="changeColorScheme('light')">Light</button>
+        <button onclick="changeColorScheme('random')">Random</button>
+      </div>
+
+      <div class="font-sizes">
+        <button onclick="increaseFontSize()">+</button>
+        <button onclick="decreaseFontSize()">-</button>
+      </div>
+
+      <div class="image-gallery">
+        <img src="image1.jpg" alt="Image 1" data-title="OLD BOY"
+          data-description="sdawnajsn djn    dnakwnds adiwanskd oanwdkna sdnw adknsakdnwa sdiwnaisndwa"
+          onclick="openImageOverlay(this)">
+        <img src="image2.jpg" alt="Image 2" data-title="Title 2"
+          data-description="Description 2" onclick="openImageOverlay(this)">
+        <img src="image3.jpg" alt="Image 3" data-title="Title 3"
+          data-description="Description 3" onclick="openImageOverlay(this)">
+        <!-- Add more images as needed -->
+        <img src="image4.jpg" alt="Image 4" data-title="Title 4"
+          data-description="Description 4" onclick="openImageOverlay(this)">
+        <img src="image5.jpg" alt="Image 5" data-title="Title 5"
+          data-description="Description 5" onclick="openImageOverlay(this)">
+        <!-- Add more images as needed -->
+      </div>
+
+      <div class="image-overlay">
+        <span class="close-button" onclick="closeImageOverlay()">&times;</span>
+        <img id="overlay-image" src alt="Overlay Image">
+        <div id="overlay-content" class="content"></div>
+      </div>
+
+      <script>
+    // Color scheme changer
+    function changeColorScheme(color) {
+      const body = document.querySelector('body');
+      switch (color) {
+        case 'default':
+          body.style.backgroundColor = '#f5f5f5';
+          body.style.color = '#333';
+          break;
+        case 'dark':
+          body.style.backgroundColor = '#222';
+          body.style.color = '#fff';
+          break;
+        case 'light':
+          body.style.backgroundColor = '#fff';
+          body.style.color = '#333';
+          break;
+        case 'random':
+          const randomColor = getRandomColor();
+          body.style.backgroundColor = randomColor;
+          body.style.color = invertColor(randomColor);
+          break;
+      }
+    }
+    
+    // Font size adjuster
+    function increaseFontSize() {
+      const body = document.querySelector('body');
+      const currentFontSize = parseInt(window.getComputedStyle(body, null).getPropertyValue('font-size'));
+      body.style.fontSize = (currentFontSize + 1) + 'px';
+    }
+    
+    function decreaseFontSize() {
+      const body = document.querySelector('body');
+      const currentFontSize = parseInt(window.getComputedStyle(body, null).getPropertyValue('font-size'));
+      body.style.fontSize = (currentFontSize - 1) + 'px';
+    }
+    
+    // Image overlay
+    function openImageOverlay(image) {
+      const overlay = document.querySelector('.image-overlay');
+      const overlayImage = document.querySelector('#overlay-image');
+      const overlayContent = document.querySelector('#overlay-content');
+      
+      overlayImage.src = image.src;
+      overlayContent.innerHTML = `
+        <h2>${image.getAttribute('data-title')}</h2>
+        <p>${image.getAttribute('data-description')}</p>
+      `;
+      overlay.classList.add('active');
+    }
+    
+    function closeImageOverlay() {
+      const overlay = document.querySelector('.image-overlay');
+      overlay.classList.remove('active');
+    }
+    
+    // Helper functions
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+    
+    function invertColor(hex) {
+      if (hex.indexOf('#') === 0) {
+        hex = hex.slice(1);
+      }
+      // Convert hex to RGB value
+      const r = parseInt(hex.substr(0, 2), 16);
+      const g = parseInt(hex.substr(2, 2), 16);
+      const b = parseInt(hex.substr(4, 2), 16);
+      // Calculate the inverted RGB values
+      const invertedR = 255 - r;
+      const invertedG = 255 - g;
+      const invertedB = 255 - b;
+      // Convert the inverted RGB values back to hex
+      const invertedHex = "#" + padZero(invertedR.toString(16)) + padZero(invertedG.toString(16)) + padZero(invertedB.toString(16));
+      return invertedHex;
+    }
+    
+    function padZero(str) {
+      return str.length === 1 ? "0" + str : str;
+    }
+  </script>
+    </body>
+  </html>
