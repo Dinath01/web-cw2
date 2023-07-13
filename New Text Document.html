@@ -97,24 +97,120 @@
                 margin: 0;
                 padding: 0;
             }
+
+            .sitemap {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 3;
+            }
+
+            .sitemap rect {
+                fill: rgba(0, 0, 0, 0.7);
+                transition: fill 0.3s ease;
+            }
+
+            .sitemap a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                text-decoration: none;
+                margin: 10px;
+                font-size: 24px;
+            }
+
+            .sitemap a:hover rect {
+                fill: #ffcc00;
+            }
+
+            .sitemap .link-text {
+                margin-left: 10px;
+            }
+
+            .sitemap-description {
+                font-family: 'Samsung Sharp Sans Regular';
+                font-style: normal;
+                font-weight: normal;
+                src: local('Samsung Sharp Sans Regular'), url('samsungsharpsans.woff') format('woff');
+                text-anchor: start;
+                font-size: 14px;
+                fill: rgba(0, 0, 0, 0.7);
+                font-weight: bold;
+            }
+
+            .empty-message {
+                position: absolute;
+                top: 80%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 3;
+                text-align: center;
+                color: white;
+                font-size: 36px;
+                font-weight: bold;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+                font-family: 'Samsung Sharp Sans Regular';
+                src: local('Samsung Sharp Sans Regular'), url('samsungsharpsans.woff') format('woff');
+            }
+
         </style>
 
     </head>
 
     <body>
+
         <nav>
             <div class = "logo">
                 <a href="#"><img src = "logo.png" alt = "Film Pope"></a>
             </div>
             <ul class="navbar">
-                <li><a href = "#" class = "selected">Home</a></li>
-                <li><a href = "#">Blog</a></li>
-                <li><a href = "#">Services</a></li>
-                <li><a href = "#">Portfolio</a></li>
-                <li><a href = "#">About</a></li>
-                <li><a href = "#">Contact</a></li>
+                <li><a href = "#" class = "selected">HOME</a></li>
+                <li><a href = "#">SHOP</a></li>
+                <li><a href = "#">SERVICES</a></li>
+                <li><a href = "#">PORTFOLIO</a></li>
+                <li><a href = "#">ABOUT</a></li>
+                <li><a href = "#">CONTACT</a></li>
             </ul>
-        </nav>
+        </nav>  
+
+    <svg class="sitemap" width="500" height="400">
+        <a href="#" class="selected">
+            <rect x="0" y="0" width="300" height="40" rx="10" ry="10" />
+            <text x="150" y="22" fill="white" font-size="24" text-anchor="middle" alignment-baseline="middle">Home</text>
+            <text class="sitemap-description" x="320" y="22">Film Pope Home Page</text>
+        </a>
+        <a href="#">
+            <rect x="0" y="60" width="300" height="40" rx="10" ry="10" />
+            <text x="150" y="82" fill="white" font-size="24" text-anchor="middle" alignment-baseline="middle">Shop</text>
+            <text class="sitemap-description" x="320" y="82">Explore Our Shop</text>
+        </a>
+        <a href="#">
+            <rect x="0" y="120" width="300" height="40" rx="10" ry="10" />
+            <text x="150" y="142" fill="white" font-size="24" text-anchor="middle" alignment-baseline="middle">Services</text>
+            <text class="sitemap-description" x="320" y="142">Check Out Our Services</text>
+        </a>
+        <a href="#">
+            <rect x="0" y="180" width="300" height="40" rx="10" ry="10" />
+            <text x="150" y="202" fill="white" font-size="24" text-anchor="middle" alignment-baseline="middle">Portfolio</text>
+            <text class="sitemap-description" x="320" y="202">View our portfolio</text>
+        </a>
+        <a href="#">
+            <rect x="0" y="240" width="300" height="40" rx="10" ry="10" />
+            <text x="150" y="262" fill="white" font-size="24" text-anchor="middle" alignment-baseline="middle">About</text>
+            <text class="sitemap-description" x="320" y="262">Learn About Film Pope</text>
+        </a>
+        <a href="#">
+            <rect x="0" y="300" width="300" height="40" rx="10" ry="10" />
+            <text x="150" y="322" fill="white" font-size="24" text-anchor="middle" alignment-baseline="middle">Contact</text>
+            <text class="sitemap-description" x="320" y="322">Get In Touch With Us</text>
+        </a>
+    </svg>
+        <div class="empty-message">
+            Discover the world of movies!
+        </div>
+        
     </body>
 
 </html>
